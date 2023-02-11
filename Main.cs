@@ -1,13 +1,5 @@
-﻿using Assets.Scripts.PeroTools.Commons;
-using FormulaBase;
-using MelonLoader;
-using System;
-using System.Collections.Generic;
+﻿using MelonLoader;
 using System.IO;
-using System.Linq;
-using System.Runtime;
-using System.Text;
-using System.Threading.Tasks;
 using Tomlet;
 using UnityEngine;
 
@@ -15,10 +7,10 @@ namespace UIDisable
 {
     public class Main : MelonMod
     {
-        private static bool IsGameScene;
-        private static bool Set;
+        private static bool IsGameScene { get; set; }
+        private static bool Set { get; set; }
 
-        public override void OnApplicationStart()
+        public override void OnInitializeMelon()
         {
             Save.Load();
             LoggerInstance.Msg("UI Disable Loaded");

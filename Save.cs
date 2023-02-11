@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Tomlet;
 using Tomlet.Attributes;
-using UnityEngine;
 
 namespace UIDisable
 {
-    internal class Save
+    internal static class Save
     {
         private static Data Default = new Data(true, true, true, true, true, true);
-        internal static Data Settings;
+        internal static Data Settings { get; set; }
 
         public static void Load()
         {
@@ -29,22 +23,22 @@ namespace UIDisable
 
     internal struct Data
     {
-        [TomlPrecedingComment("Disable Score GameObject or not")]
+        [TomlPrecedingComment("Enable Score GameObject or not")]
         internal bool ScoreEnabled;
 
-        [TomlPrecedingComment("Disable Fever bar and HP or not")]
+        [TomlPrecedingComment("Enable Fever bar and HP or not")]
         internal bool BottomBarEnabled;
 
-        [TomlPrecedingComment("Disable HitPoint or not")]
+        [TomlPrecedingComment("Enable HitPoint or not")]
         internal bool HitPointEnabled;
 
-        [TomlPrecedingComment("Disable Combo and hits count or not")]
+        [TomlPrecedingComment("Enable Combo and hits count or not")]
         internal bool ComboEnabled;
 
-        [TomlPrecedingComment("Disable all hit effects")]
+        [TomlPrecedingComment("Enable all hit effects")]
         internal bool EffectEnabled;
 
-        [TomlPrecedingComment("Disable pause button or not(you cannot pause if disable the button)")]
+        [TomlPrecedingComment("Enable pause button or not(you cannot pause if disable the button)")]
         internal bool PauseButtonEnabled;
 
         internal Data(bool scoreEnabled, bool bottomBarEnabled, bool hitPointEnabled, bool comboEnabled, bool effectEnabled, bool pauseButtonEnabled)
