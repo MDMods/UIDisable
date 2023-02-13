@@ -6,18 +6,19 @@ namespace UIDisable
 {
     internal static class Save
     {
-        private static Data Default = new Data(true, true, true, true, true, true);
+        private static readonly Data Default = new Data(true, true, true, true, true, true);
         internal static Data Settings { get; set; }
 
         public static void Load()
         {
             if (!File.Exists(Path.Combine("UserData", "UI Disable.cfg")))
             {
-                string defaultConfig = TomletMain.TomlStringFrom(Default);
+                var defaultConfig = TomletMain.TomlStringFrom(Default);
                 File.WriteAllText(Path.Combine("UserData", "UI Disable.cfg"), defaultConfig);
             }
-            string Datas = File.ReadAllText(Path.Combine("UserData", "UI Disable.cfg"));
-            Settings = TomletMain.To<Data>(Datas);
+
+            var datas = File.ReadAllText(Path.Combine("UserData", "UI Disable.cfg"));
+            Settings = TomletMain.To<Data>(datas);
         }
     }
 

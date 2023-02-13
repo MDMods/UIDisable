@@ -47,6 +47,10 @@
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Muse Dash\MelonLoader\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="MuseDashMirror">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Muse Dash\Mods\MuseDashMirror.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

@@ -1,88 +1,58 @@
 ﻿using MelonLoader;
-using System.IO;
-using Tomlet;
+using MuseDashMirror;
 using UnityEngine;
 
 namespace UIDisable
 {
     public class Main : MelonMod
     {
-        private static bool IsGameScene { get; set; }
-        private static bool Set { get; set; }
-
         public override void OnInitializeMelon()
         {
             Save.Load();
+            BattleComponent.GameStartEvent += DisableUI;
             LoggerInstance.Msg("UI Disable Loaded");
         }
 
-        public override void OnSceneWasLoaded(int buildIndex, string sceneName)
+        private void DisableUI()
         {
-            if (sceneName == "GameMain")
+            var ui_2d = GameObject.Find("UI_2D");
+            var sceneObjectController = GameObject.Find("SceneObjectController");
+            var pnlBattle = ui_2d.transform.GetChild(0).GetChild(0);
+            var pnlCommonUI = pnlBattle.GetChild(0);
+            var pnlBattleOthers = pnlBattle.GetChild(1).GetChild(0);
+            if (!Save.Settings.ComboEnabled)
             {
-                IsGameScene = true;
-                Set = false;
+                pnlCommonUI.gameObject.SetActive(false);
             }
-            else
-            {
-                IsGameScene = false;
-            }
-        }
 
-        public override void OnUpdate()
-        {
-            if (IsGameScene)
+            if (!Save.Settings.ScoreEnabled)
             {
-                if (!Save.Settings.ComboEnabled)
-                {
-                    if (GameObject.Find("Combo"))
-                    {
-                        GameObject.Find("Combo").SetActive(false);
-                    }
-                    else if (GameObject.Find("ComboGC"))
-                    {
-                        GameObject.Find("ComboGC").SetActive(false);
-                    }
-                    else if (GameObject.Find("Combo_djmax"))
-                    {
-                        GameObject.Find("Combo_djmax").SetActive(false);
-                    }
-                }
-
-                if (!Set)
-                {
-                    if (!Save.Settings.ScoreEnabled)
-                    {
-                        GameObject.Find("Score").SetActive(false);
-                    }
-                    if (!Save.Settings.BottomBarEnabled)
-                    {
-                        GameObject.Find("Below").SetActive(false);
-                    }
-                    if (!Save.Settings.HitPointEnabled)
-                    {
-                        GameObject.Find("HitPointRoad").SetActive(false);
-                        GameObject.Find("HitPointAir").SetActive(false);
-                    }
-                    if (!Save.Settings.ComboEnabled)
-                    {
-                        GameObject.Find("MultiHitComboControl").SetActive(false);
-                    }
-                    if (!Save.Settings.EffectEnabled)
-                    {
-                        GameObject.Find("Effects").SetActive(false);
-                    }
-                    if (!Save.Settings.PauseButtonEnabled)
-                    {
-                        GameObject.Find("BtnPause").SetActive(false);
-                    }
-                    Set = true;
-                }
+                pnlBattleOthers.GetChild(5).gameObject.SetActive(false);
             }
-            if (Input.GetKeyDown(KeyCode.F9))
+
+            if (!Save.Settings.BottomBarEnabled)
             {
-                string Datas = File.ReadAllText(Path.Combine("UserData", "UI Disable.cfg"));
-                Save.Settings = TomletMain.To<Data>(Datas);
+                pnlBattleOthers.GetChild(3).gameObject.SetActive(false);
+            }
+
+            if (!Save.Settings.HitPointEnabled)
+            {
+                sceneObjectController.transform.GetChild(1).gameObject.SetActive(false);
+            }
+
+            if (!Save.Settings.ComboEnabled)
+            {
+                GameObject.Find("MultiHitComboControl").SetActive(false);
+            }
+
+            if (!Save.Settings.EffectEnabled)
+            {
+                GameObject.Find("Effects").SetActive(false);
+            }
+
+            if (!Save.Settings.PauseButtonEnabled)
+            {
+                pnlBattleOthers.GetChild(2).gameObject.SetActive(false);
             }
         }
     }

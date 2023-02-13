@@ -1,6 +1,7 @@
-﻿using MelonLoader;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
+using MelonLoader;
+using Main = UIDisable.Main;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -34,5 +35,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: MelonInfo(typeof(UIDisable.Main), "UI Disable", "1.0.1", "lxy")]
+[assembly: MelonInfo(typeof(Main), "UI Disable", "1.0.2", "lxy")]
 [assembly: MelonGame("PeroPeroGames", "MuseDash")]
