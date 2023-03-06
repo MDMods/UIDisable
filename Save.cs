@@ -6,8 +6,8 @@ namespace UIDisable
 {
     internal static class Save
     {
-        private static readonly Data Default = new Data(true, true, true, true, true, true);
-        internal static Data Settings { get; set; }
+        private static readonly Data Default = new Data(false, true, true, true, true, true, true);
+        internal static Data Settings;
 
         public static void Load()
         {
@@ -17,13 +17,16 @@ namespace UIDisable
                 File.WriteAllText(Path.Combine("UserData", "UI Disable.cfg"), defaultConfig);
             }
 
-            var datas = File.ReadAllText(Path.Combine("UserData", "UI Disable.cfg"));
-            Settings = TomletMain.To<Data>(datas);
+            var data = File.ReadAllText(Path.Combine("UserData", "UI Disable.cfg"));
+            Settings = TomletMain.To<Data>(data);
         }
     }
 
     internal struct Data
     {
+        [TomlPrecedingComment("Disable UI elements or not")]
+        internal bool UIDisabled;
+
         [TomlPrecedingComment("Enable Score GameObject or not")]
         internal bool ScoreEnabled;
 
@@ -42,8 +45,9 @@ namespace UIDisable
         [TomlPrecedingComment("Enable pause button or not(you cannot pause if disable the button)")]
         internal bool PauseButtonEnabled;
 
-        internal Data(bool scoreEnabled, bool bottomBarEnabled, bool hitPointEnabled, bool comboEnabled, bool effectEnabled, bool pauseButtonEnabled)
+        internal Data(bool uiDisabled, bool scoreEnabled, bool bottomBarEnabled, bool hitPointEnabled, bool comboEnabled, bool effectEnabled, bool pauseButtonEnabled)
         {
+            UIDisabled = uiDisabled;
             ScoreEnabled = scoreEnabled;
             BottomBarEnabled = bottomBarEnabled;
             HitPointEnabled = hitPointEnabled;
