@@ -33,7 +33,7 @@ using Main = UIDisable.Main;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.0")]
-[assembly: AssemblyFileVersion("1.1.0")]
-[assembly: MelonInfo(typeof(Main), "UI Disable", "1.1.0", "lxy")]
+[assembly: AssemblyVersion("1.1.1")]
+[assembly: AssemblyFileVersion("1.1.1")]
+[assembly: MelonInfo(typeof(Main), "UI Disable", "1.1.1", "lxy")]
 [assembly: MelonGame("PeroPeroGames", "MuseDash")]

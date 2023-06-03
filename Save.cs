@@ -6,14 +6,13 @@ namespace UIDisable
 {
     internal static class Save
     {
-        private static readonly Data Default = new Data(false, true, true, true, true, true, true);
         internal static Data Settings;
 
         public static void Load()
         {
             if (!File.Exists(Path.Combine("UserData", "UI Disable.cfg")))
             {
-                var defaultConfig = TomletMain.TomlStringFrom(Default);
+                var defaultConfig = TomletMain.TomlStringFrom(new Data());
                 File.WriteAllText(Path.Combine("UserData", "UI Disable.cfg"), defaultConfig);
             }
 
@@ -22,38 +21,28 @@ namespace UIDisable
         }
     }
 
-    internal struct Data
+    public class Data
     {
         [TomlPrecedingComment("Disable UI elements or not")]
-        internal bool UIDisabled;
+        internal bool UIDisabled = false;
 
         [TomlPrecedingComment("Enable Score GameObject or not")]
-        internal bool ScoreEnabled;
+        internal bool ScoreEnabled { get; set; } = true;
 
         [TomlPrecedingComment("Enable Fever bar and HP or not")]
-        internal bool BottomBarEnabled;
+        internal bool BottomBarEnabled { get; set; } = true;
 
         [TomlPrecedingComment("Enable HitPoint or not")]
-        internal bool HitPointEnabled;
+        internal bool HitPointEnabled { get; set; } = true;
 
         [TomlPrecedingComment("Enable Combo and hits count or not")]
-        internal bool ComboEnabled;
+        internal bool ComboEnabled { get; set; } = true;
 
         [TomlPrecedingComment("Enable all hit effects")]
-        internal bool EffectEnabled;
+
+        internal bool EffectEnabled { get; set; } = true;
 
         [TomlPrecedingComment("Enable pause button or not(you cannot pause if disable the button)")]
-        internal bool PauseButtonEnabled;
-
-        internal Data(bool uiDisabled, bool scoreEnabled, bool bottomBarEnabled, bool hitPointEnabled, bool comboEnabled, bool effectEnabled, bool pauseButtonEnabled)
-        {
-            UIDisabled = uiDisabled;
-            ScoreEnabled = scoreEnabled;
-            BottomBarEnabled = bottomBarEnabled;
-            HitPointEnabled = hitPointEnabled;
-            ComboEnabled = comboEnabled;
-            EffectEnabled = effectEnabled;
-            PauseButtonEnabled = pauseButtonEnabled;
-        }
+        internal bool PauseButtonEnabled { get; set; } = true;
     }
 }
